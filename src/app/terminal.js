@@ -44,34 +44,34 @@ export function runRootTerminal(term) {
                         term.clearCurrentLine(true);
                     }
                     break;
-                // case '\u0001': // Ctrl+A
-                //     term.write('\x1b[D'.repeat(term.pos()));
-                //     break;
-                // case '\u0005': // Ctrl+E
-                //     if (term.pos() < term.currentLine.length) {
-                //         term.write('\x1b[C'.repeat(term.currentLine.length - term.pos()));
-                //     }
-                //     break;
-                // case '\u0003': // Ctrl+C
-                //     term.prompt();
-                //     term.clearCurrentLine(true);
-                //     break;
-                // case '\u0008': // Ctrl+H
-                // case '\u007F': // Backspace (DEL)
-                //     // Do not delete the prompt
-                //     if (term.pos() > 0) {
-                //         const newLine = term.currentLine.slice(0, term.pos() - 1) + term.currentLine.slice(term.pos());
-                //         term.setCurrentLine(newLine, true)
-                //     }
-                //     break;
-                // case '\033[A': // up
+                case "\u0001": // Ctrl+A
+                    term.write('\x1b[D'.repeat(term.pos()));
+                    break;
+                case "\u0005": // Ctrl+E
+                    if (term.pos() < term.currentLine.length) {
+                        term.write('\x1b[C'.repeat(term.currentLine.length - term.pos()));
+                    }
+                    break;
+                case "\u0003": // Ctrl+C
+                    term.prompt();
+                    term.clearCurrentLine(true);
+                    break;
+                case "\u0008": // Ctrl+H
+                case "\u007F": // Backspace (DEL)
+                    // Do not delete the prompt
+                    if (term.pos() > 0) {
+                        const newLine = term.currentLine.slice(0, term.pos() - 1) + term.currentLine.slice(term.pos());
+                        term.setCurrentLine(newLine, true)
+                    }
+                    break;
+                // case "\033[A": // up
                 //     var h = [...term.history].reverse();
                 //     if (term.historyCursor < h.length - 1) {
                 //         term.historyCursor += 1;
                 //         term.setCurrentLine(h[term.historyCursor], false);
                 //     }
                 //     break;
-                // case '\033[B': // down
+                // case "\033[B": // down
                 //     var h = [...term.history].reverse();
                 //     if (term.historyCursor > 0) {
                 //         term.historyCursor -= 1;
@@ -80,12 +80,12 @@ export function runRootTerminal(term) {
                 //         term.clearCurrentLine(true);
                 //     }
                 //     break;
-                // case '\033[C': // right
+                // case "\033[C": // right
                 //     if (term.pos() < term.currentLine.length) {
                 //         term.write('\x1b[C');
                 //     }
                 //     break;
-                // case '\033[D': // left
+                // case "\033[D": // left
                 //     if (term.pos() > 0) {
                 //         term.write('\x1b[D');
                 //     }
