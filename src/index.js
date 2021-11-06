@@ -1,4 +1,6 @@
-// import _ from 'lodash';
+import './styles/main.css'
+import 'xterm/css/xterm.css'
+
 import { Terminal } from "xterm";
 
 import { FitAddon } from "xterm-addon-fit";
