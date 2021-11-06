@@ -1,5 +1,5 @@
 
-import  { getFileContents } from "./fs"
+// import  { getFileContents } from "./fs"
 import { team } from "./team";
 import { portfolio } from "./portfolio";
 import { help } from "./help";
@@ -32,7 +32,7 @@ export const commands = {
     if (!name) {
       term.stylePrint("%whois%: Learn about the firm, or a partner - usage:\r\n");
       term.stylePrint("%whois% root");
-      for (p of people) {
+      for (let p of people) {
         term.stylePrint(`%whois% ${p}`);
       }
     } else if (name == "root") {
@@ -129,104 +129,104 @@ export const commands = {
     term.stylePrint(`(Robot voice): ${message}`);
   },
 
-  pwd: function () {
-    term.stylePrint("/" + term.cwd.replaceAll("~", `home/${term.user}`));
-  },
+  // pwd: function () {
+  //   term.stylePrint("/" + term.cwd.replaceAll("~", `home/${term.user}`));
+  // },
 
   ls: function () {
     term.stylePrint(_filesHere().join("   "));
   },
 
   // I am so, so sorry for this code.
-  cd: function (args) {
-    let dir = args[0] || "~";
-    if (dir != "/") {
-      // strip trailing slash
-      dir = dir.replace(/\/$/, "");
-    }
+  // cd: function (args) {
+  //   let dir = args[0] || "~";
+  //   if (dir != "/") {
+  //     // strip trailing slash
+  //     dir = dir.replace(/\/$/, "");
+  //   }
 
-    switch (dir) {
-      case "~":
-        term.cwd = "~";
-        break;
-      case "..":
-        if (term.cwd == "~") {
-          term.command("cd /home");
-        } else if (["home", "bin"].includes(term.cwd)) {
-          term.command("cd /");
-        }
-        break;
-      case "../..":
-      case "../../..":
-      case "../../../..":
-      case "/":
-        term.cwd = "/";
-        break;
-      case "home":
-        if (term.cwd == "/") {
-          term.command("cd /home");
-        } else {
-          term.stylePrint(`You do not have permission to access this directory`);
-        }
-        break;
-      case "/home":
-        term.cwd = "home";
-        break;
-      case "guest":
-      case "root":
-        if (term.cwd == "home") {
-          if (term.user == dir) {
-            term.command("cd ~");
-          } else {
-            term.stylePrint(`You do not have permission to access this directory`);
-          }
-        } else {
-          term.stylePrint(`No such directory: ${dir}`);
-        }
-        break;
-      case "../home/avidan":
-      case "../home/kane":
-      case "../home/chrissy":
-      case "../home/lee":
-      case "../home/emily":
-      case "../home/laelah":
-        if (term.cwd == "~" || term.cwd == "bin") {
-          term.command(`cd ${dir.split("/")[2]}`);
-        } else {
-          term.stylePrint(`No such directory: ${dir}`);
-        }
-        break;
-      case "/home/avidan":
-      case "/home/kane":
-      case "/home/chrissy":
-      case "/home/lee":
-      case "/home/emily":
-      case "/home/laelah":
-      case "avidan":
-      case "kane":
-      case "chrissy":
-      case "lee":
-      case "emily":
-      case "laelah":
-        term.stylePrint(`You do not have permission to access this directory`);
-        break;
-      case "/bin":
-        term.cwd = "bin";
-        break;
-      case "bin":
-        if (term.cwd == "/") {
-          term.cwd = "bin";
-        } else {
-          term.stylePrint(`No such directory: ${dir}`);
-        }
-        break;
-      case ".":
-        break;
-      default:
-        term.stylePrint(`No such directory: ${dir}`);
-        break;
-    }
-  },
+  //   switch (dir) {
+  //     case "~":
+  //       term.cwd = "~";
+  //       break;
+  //     case "..":
+  //       if (term.cwd == "~") {
+  //         term.command("cd /home");
+  //       } else if (["home", "bin"].includes(term.cwd)) {
+  //         term.command("cd /");
+  //       }
+  //       break;
+  //     case "../..":
+  //     case "../../..":
+  //     case "../../../..":
+  //     case "/":
+  //       term.cwd = "/";
+  //       break;
+  //     case "home":
+  //       if (term.cwd == "/") {
+  //         term.command("cd /home");
+  //       } else {
+  //         term.stylePrint(`You do not have permission to access this directory`);
+  //       }
+  //       break;
+  //     case "/home":
+  //       term.cwd = "home";
+  //       break;
+  //     case "guest":
+  //     case "root":
+  //       if (term.cwd == "home") {
+  //         if (term.user == dir) {
+  //           term.command("cd ~");
+  //         } else {
+  //           term.stylePrint(`You do not have permission to access this directory`);
+  //         }
+  //       } else {
+  //         term.stylePrint(`No such directory: ${dir}`);
+  //       }
+  //       break;
+  //     case "../home/avidan":
+  //     case "../home/kane":
+  //     case "../home/chrissy":
+  //     case "../home/lee":
+  //     case "../home/emily":
+  //     case "../home/laelah":
+  //       if (term.cwd == "~" || term.cwd == "bin") {
+  //         term.command(`cd ${dir.split("/")[2]}`);
+  //       } else {
+  //         term.stylePrint(`No such directory: ${dir}`);
+  //       }
+  //       break;
+  //     case "/home/avidan":
+  //     case "/home/kane":
+  //     case "/home/chrissy":
+  //     case "/home/lee":
+  //     case "/home/emily":
+  //     case "/home/laelah":
+  //     case "avidan":
+  //     case "kane":
+  //     case "chrissy":
+  //     case "lee":
+  //     case "emily":
+  //     case "laelah":
+  //       term.stylePrint(`You do not have permission to access this directory`);
+  //       break;
+  //     case "/bin":
+  //       term.cwd = "bin";
+  //       break;
+  //     case "bin":
+  //       if (term.cwd == "/") {
+  //         term.cwd = "bin";
+  //       } else {
+  //         term.stylePrint(`No such directory: ${dir}`);
+  //       }
+  //       break;
+  //     case ".":
+  //       break;
+  //     default:
+  //       term.stylePrint(`No such directory: ${dir}`);
+  //       break;
+  //   }
+  // },
 
   zsh: function () {
     term.init(term.user);
@@ -594,16 +594,16 @@ export const commands = {
   }
 }
 
-// Add commands for company demos
-for (kv of Object.entries(portfolio)) {
-  const key = kv[0];
-  const val = kv[1];
+// // Add commands for company demos
+// for (kv of Object.entries(portfolio)) {
+//   const key = kv[0];
+//   const val = kv[1];
 
-  if (val["demo"]) {
-    commands[key] = () => term.displayURL(val["demo"]);
-  }
-}
+//   if (val["demo"]) {
+//     commands[key] = () => term.displayURL(val["demo"]);
+//   }
+// }
 
-function _filesHere() {
-  return _DIRS[term.cwd].filter((e) => e != 'README.md' || term.user == "root");
-}
+// function _filesHere() {
+//   return _DIRS[term.cwd].filter((e) => e != 'README.md' || term.user == "root");
+// }
