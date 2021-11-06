@@ -1,11 +1,12 @@
 import { colorText } from "./utils";
+import { commands } from "./config/commands";
 
 export const extend = (term,fitAddon) => {
     term.currentLine = "";
     term.user = "guest";
-    term.host = "rootpc";
+    term.host = "vitlug";
     term.cwd = "~";
-    term.sep = ":";
+    term.sep = "@";
     term._promptChar = "$";
     term.history = [];
     term.historyCursor = -1;
@@ -99,17 +100,17 @@ export const extend = (term,fitAddon) => {
         term.stylePrint(colorText(url, "hyperlink"));
     }
 
-    // term.command = (line) => {
-    //     const parts = line.split(/\s+/);
-    //     const cmd = parts[0].toLowerCase();
-    //     const args = parts.slice(1, parts.length)
-    //     const fn = commands[cmd];
-    //     if (typeof (fn) === "undefined") {
-    //         term.stylePrint(`Command not found: ${cmd}. Try 'help' to get started.`);
-    //     } else {
-    //         return fn(args);
-    //     }
-    // }
+    term.command = (line) => {
+        const parts = line.split(/\s+/);
+        const cmd = parts[0].toLowerCase();
+        const args = parts.slice(1, parts.length)
+        const fn = commands[cmd];
+        if (typeof (fn) === "undefined") {
+            term.stylePrint(`Command not found: ${cmd}. Try 'help' to get started.`);
+        } else {
+            return fn(args);
+        }
+    }
 
     term.resizeListener = () => {
         term._initialized = false;
