@@ -1,3 +1,4 @@
+import { colorText } from "./utils";
 
 export const extend = (term,fitAddon) => {
     term.currentLine = "";
@@ -50,7 +51,7 @@ export const extend = (term,fitAddon) => {
         const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
         const urlMatches = text.matchAll(urlRegex);
         let allowWrapping = true;
-        for (match of urlMatches) {
+        for (let match of urlMatches) {
             allowWrapping = match[0].length < 76;
             text = text.replace(match[0], colorText(match[0], "hyperlink"));
         }
@@ -60,14 +61,14 @@ export const extend = (term,fitAddon) => {
             text = _wordWrap(text, Math.min(term.cols, 76));
         }
 
-        // Commands
-        const cmds = Object.keys(commands);
-        for (cmd of cmds) {
-            const cmdMatches = text.matchAll(`%${cmd}%`);
-            for (match of cmdMatches) {
-                text = text.replace(match[0], colorText(cmd, "command"));
-            }
-        }
+        // // Commands
+        // const cmds = Object.keys(commands);
+        // for (let cmd of cmds) {
+        //     const cmdMatches = text.matchAll(`%${cmd}%`);
+        //     for (match of cmdMatches) {
+        //         text = text.replace(match[0], colorText(cmd, "command"));
+        //     }
+        // }
 
         term.writeln(text);
     };
@@ -98,17 +99,17 @@ export const extend = (term,fitAddon) => {
         term.stylePrint(colorText(url, "hyperlink"));
     }
 
-    term.command = (line) => {
-        const parts = line.split(/\s+/);
-        const cmd = parts[0].toLowerCase();
-        const args = parts.slice(1, parts.length)
-        const fn = commands[cmd];
-        if (typeof (fn) === "undefined") {
-            term.stylePrint(`Command not found: ${cmd}. Try 'help' to get started.`);
-        } else {
-            return fn(args);
-        }
-    }
+    // term.command = (line) => {
+    //     const parts = line.split(/\s+/);
+    //     const cmd = parts[0].toLowerCase();
+    //     const args = parts.slice(1, parts.length)
+    //     const fn = commands[cmd];
+    //     if (typeof (fn) === "undefined") {
+    //         term.stylePrint(`Command not found: ${cmd}. Try 'help' to get started.`);
+    //     } else {
+    //         return fn(args);
+    //     }
+    // }
 
     term.resizeListener = () => {
         term._initialized = false;
