@@ -10,24 +10,24 @@ export const whoisRoot = "Root Ventures is a hard tech seed fund in San Francisc
 // export const commands = {
 
 export const commands = {
-  // help: function () {
-  //   const maxCmdLength = Math.max(...Object.keys(help).map(x => x.length));
-  //   Object.entries(help).forEach(function (kv) {
-  //     const cmd = kv[0];
-  //     const desc = kv[1];
-  //     if (term.cols >= 80) {
-  //       const rightPad = maxCmdLength - cmd.length + 2;
-  //       const sep = " ".repeat(rightPad);
-  //       term.stylePrint(`${cmd}${sep}${desc}`);
-  //     } else {
-  //       if (cmd != 'help') { // skip second leading newline
-  //         term.writeln("");
-  //       }
-  //       term.stylePrint(cmd);
-  //       term.stylePrint(desc);
-  //     }
-  //   })
-  // },
+  help: function (term) {
+    const maxCmdLength = Math.max(...Object.keys(help).map(x => x.length));
+    Object.entries(help).forEach(function (kv) {
+      const cmd = kv[0];
+      const desc = kv[1];
+      if (term.cols >= 80) {
+        const rightPad = maxCmdLength - cmd.length + 2;
+        const sep = " ".repeat(rightPad);
+        term.stylePrint(`${cmd}${sep}${desc}`);
+      } else {
+        if (cmd != 'help') { // skip second leading newline
+          term.writeln("");
+        }
+        term.stylePrint(cmd);
+        term.stylePrint(desc);
+      }
+    })
+  },
 
   // whois: function (args) {
   //   const name = args[0];
@@ -90,52 +90,51 @@ export const commands = {
   //   }
   // },
 
-  git: function () {
-    term.displayURL("https://github.com/rootvc/cli-website");
+  git: function (term) {
+    term.displayURL("https://github.com/vitlug");
   },
 
-  test: function () {
+  test: function (term) {
     term.openURL("https://gfycat.com/ifr/WhiteBountifulAfricangroundhornbill");
   },
 
-  email: function () {
+  email: function (term) {
     term.command("pine");
   },
 
-  github: function () {
-    term.displayURL("https://github.com/rootvc");
+  github: function (term) {
+    term.displayURL("https://github.com/vitlug");
   },
 
-  twitter: function () {
-    term.displayURL("https://twitter.com/rootvc");
-    term.displayURL("https://twitter.com/machinepix");
+  twitter: function (term) {
+    term.displayURL("https://twitter.com/vitlug");
   },
 
-  instagram: function () {
-    term.displayURL("https://instagram.com/machinepix/");
+  instagram: function (term) {
+    term.displayURL("https://www.instagram.com/vit_lug");
   },
 
-  insta: function () {
+  insta: function (term) {
     term.command("instagram");
   },
 
-  other: function () {
+  other: function (term) {
     term.stylePrint("Yeah, I didn't literally mean %other%. I mean try some Linux commands");
   },
 
-  echo: function (args) {
+  echo: function (term, args) {
     const message = args.join(" ");
     term.stylePrint(message);
   },
 
-  say: function (args) {
+  say: function (term, args) {
     const message = args.join(" ");
     term.stylePrint(`(Robot voice): ${message}`);
   },
 
-  // pwd: function () {
-  //   term.stylePrint("/" + term.cwd.replaceAll("~", `home/${term.user}`));
-  // },
+  pwd: function (term) {
+    term.stylePrint("/" + term.cwd.replaceAll("~", `home/${term.user}`));
+  },
 
   // ls: function () {
   //   term.stylePrint(_filesHere().join("   "));
@@ -232,9 +231,9 @@ export const commands = {
   //   }
   // },
 
-  // zsh: function () {
-  //   term.init(term.user);
-  // },
+  zsh: function (term) {
+    term.init(term.user);
+  },
 
   // cat: function (args) {
   //   const filename = args[0];
@@ -343,17 +342,17 @@ export const commands = {
   //   term.stylePrint("Honestly, our memory isn't what it used to be");
   // },
 
-  // tail: function (args) {
-  //   term.command(`cat ${args.join(" ")}`);
-  // },
+  tail: function (term, args) {
+    term.command(`cat ${args.join(" ")}`);
+  },
 
-  // less: function (args) {
-  //   term.command(`cat ${args.join(" ")}`);
-  // },
+  less: function (term, args) {
+    term.command(`cat ${args.join(" ")}`);
+  },
 
-  // head: function (args) {
-  //   term.command(`cat ${args.join(" ")}`);
-  // },
+  head: function (term, args) {
+    term.command(`cat ${args.join(" ")}`);
+  },
 
   // open: function (args) {
   //   if (args[0].split(".")[1] == "htm") {
@@ -363,41 +362,41 @@ export const commands = {
   //   }
   // },
 
-  // more: function (args) {
-  //   term.command(`cat ${args.join(" ")}`);
-  // },
+  more: function (term, args) {
+    term.command(`cat ${args.join(" ")}`);
+  },
 
-  // emacs: function () {
-  //   term.stylePrint("%emacs% not installed. try: %vi%");
-  // },
+  emacs: function (term) {
+    term.stylePrint("%emacs% not installed. try: %vi%");
+  },
 
-  // vim: function () {
-  //   term.stylePrint("%vim% not installed. try: %emacs%");
-  // },
+  vim: function (term) {
+    term.stylePrint("%vim% not installed. try: %emacs%");
+  },
 
-  // vi: function () {
-  //   term.stylePrint("%vi% not installed. try: %emacs%");
-  // },
+  vi: function (term) {
+    term.stylePrint("%vi% not installed. try: %emacs%");
+  },
 
-  // pico: function () {
-  //   term.stylePrint("%pico% not installed. try: %vi% or %emacs%");
-  // },
+  pico: function (term) {
+    term.stylePrint("%pico% not installed. try: %vi% or %emacs%");
+  },
 
-  // nano: function () {
-  //   term.stylePrint("%nano% not installed. try: %vi% or %emacs%");
-  // },
+  nano: function (term) {
+    term.stylePrint("%nano% not installed. try: %vi% or %emacs%");
+  },
 
-  // pine: function () {
-  //   term.openURL("mailto:hello@root.vc");
-  // },
+  pine: function (term) {
+    term.openURL("mailto:linux@vit.ac.in");
+  },
 
-  // curl: function (args) {
-  //   term.stylePrint(`Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource ${args[0]}.`);
-  // },
+  curl: function (term, args) {
+    term.stylePrint(`Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource ${args[0]}.`);
+  },
 
-  // ftp: function (args) {
-  //   term.command(`curl ${args.join(" ")}`);
-  // },
+  ftp: function (term,args) {
+    term.command(`curl ${args.join(" ")}`);
+  },
 
   // ssh: function (args) {
   //   term.command(`curl ${args.join(" ")}`);
@@ -420,7 +419,7 @@ export const commands = {
   // },
 
   // alias: function () {
-  //   term.stylePrint("Just call me HAL");
+  //   term.stylePrint("Just call me Tux 🐧");
   // },
 
   // df: function () {
@@ -431,11 +430,11 @@ export const commands = {
   //   term.stylePrint("Easy, killer");
   // },
 
-  // locate: function () {
-  //   term.stylePrint("Root Ventures");
-  //   term.stylePrint("2670 Harrison St");
-  //   term.stylePrint("San Francisco, CA 94110");
-  // },
+  locate: function (term) {
+    term.stylePrint("VIT, Vellore Campus");
+    term.stylePrint("Tiruvalam Rd, Katpadi, Vellore");
+    term.stylePrint("Tamil Nadu 632014");
+  },
 
   // history: function () {
   //   term.history.forEach((element, index) => {
@@ -452,17 +451,17 @@ export const commands = {
   //   }
   // },
 
-  // fdisk: function () {
-  //   term.command("rm");
-  // },
+  fdisk: function (term) {
+    term.command("rm");
+  },
 
-  // chown: function () {
-  //   term.stylePrint("You do not have permission to %chown%");
-  // },
+  chown: function (term) {
+    term.stylePrint("You do not have permission to %chown%");
+  },
 
-  // chmod: function () {
-  //   term.stylePrint("You do not have permission to %chmod%");
-  // },
+  chmod: function (term) {
+    term.stylePrint("You do not have permission to %chmod%");
+  },
 
   // mv: function (args) {
   //   const src = args[0];
@@ -484,9 +483,9 @@ export const commands = {
   //   }
   // },
 
-  // touch: function () {
-  //   term.stylePrint("You can't %touch% this");
-  // },
+  touch: function (term) {
+    term.stylePrint("You can't %touch% this");
+  },
 
   // sudo: function (args) {
   //   if (term.user == "root") {
@@ -508,76 +507,77 @@ export const commands = {
   //   }
   // },
 
-  // quit: function () {
-  //   term.command("exit");
-  // },
+  quit: function (term) {
+    term.command("exit");
+  },
 
-  // stop: function () {
-  //   term.command("exit");
-  // },
+  stop: function (term) {
+    term.command("exit");
+  },
 
-  // whoami: function () {
-  //   term.stylePrint(term.user);
-  // },
+  whoami: function (term) {
+    term.stylePrint(term.user);
+  },
 
-  // passwd: function () {
-  //   term.stylePrint("Wow. Maybe don't enter your password into a sketchy web-based term.command prompt?");
-  // },
+  passwd: function (term) {
+    term.stylePrint("Wow. Maybe don't enter your password into a sketchy web-based term.command prompt?");
+  },
 
-  // man: function (args) {
-  //   term.command(`tldr ${args}`);
-  // },
+  man: function (term,args) {
+    term.command(`tldr ${args}`);
+  },
 
-  // woman: function (args) {
-  //   term.command(`tldr ${args}`);
-  // },
+  woman: function (term,args) {
+    term.command(`tldr ${args}`);
+  },
 
-  // ping: function () {
-  //   term.stylePrint("pong");
-  // },
+  ping: function (term) {
+    term.stylePrint("pong");
+  },
 
-  // ps: function () {
-  //   term.stylePrint("PID TTY       TIME CMD");
-  //   term.stylePrint("424 ttys00 0:00.33 %-zsh%");
-  //   term.stylePrint("158 ttys01 0:09.70 %/bin/npm start%");
-  //   term.stylePrint("767 ttys02 0:00.02 %/bin/sh%");
-  //   term.stylePrint("337 ttys03 0:13.37 %/bin/cgminer -o pwn.d%");
-  // },
+  ps: function (term) {
+    term.stylePrint("PID TTY       TIME CMD");
+    term.stylePrint("424 ttys00 0:00.33 %-zsh%");
+    term.stylePrint("158 ttys01 0:09.70 %/bin/npm start%");
+    term.stylePrint("767 ttys02 0:00.02 %/bin/sh%");
+    term.stylePrint("337 ttys03 0:13.37 %/bin/cgminer -o pwn.d%");
+  },
 
-  // uname: function (args) {
-  //   switch (args[0]) {
-  //     case "-a":
-  //       term.stylePrint("RootPC rootpc 0.0.1 RootPC Kernel Version 0.0.1 root:xnu-31415.926.5~3/RELEASE_X86_64 x86_64");
-  //       break;
-  //     case "-mrs":
-  //       term.stylePrint("RootPC 0.0.1 x86_64");
-  //       break;
-  //     default:
-  //       term.stylePrint("RootPC");
-  //   }
-  // },
+  uname: function (term,args) {
+    switch (args[0]) {
+      case "-a":
+        term.stylePrint("VITLUGpc VITLUGpc 0.0.1 RootPC Kernel Version 0.0.1 root:xnu-31415.926.5~3/RELEASE_X86_64 x86_64");
+        break;
+      case "-mrs":
+        term.stylePrint("VITLUGpc 0.0.1 x86_64");
+        break;
+      default:
+        term.stylePrint("VITLUGpc");
+    }
+  },
 
-  // top: function () {
-  //   term.command("ps");
-  // },
+  top: function (term) {
+    term.command("ps");
+  },
 
-  // exit: function () {
-  //   term.command("open welcome.htm");
-  // },
+  exit: function (term) {
+    term.stylePrint("Why leave");
+    // term.command("open welcome.htm");
+  },
 
-  clear: function () {
+  clear: function (term) {
     term.init();
   },
 
-  zed: function () {
+  zed: function (term) {
     term.stylePrint("Coming soon! ;)");
   },
 
-  ge: function () {
+  ge: function (term) {
     term.command("great_expectations");
   },
 
-  great_expectations: function () {
+  great_expectations: function (term) {
     term.command("superconductive");
   },
 

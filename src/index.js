@@ -19,6 +19,6 @@ const webLinksAddon = new WebLinksAddon();
 term.open(document.getElementById('terminal'));
 term.loadAddon(fitAddon);
 term.loadAddon(webLinksAddon);
-term.write('Hello from mxterm.js $ ')
+
 extend(term,fitAddon);
 runRootTerminal(term);

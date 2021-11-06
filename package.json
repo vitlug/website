@@ -24,6 +24,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "aalib.js": "^2.0.0",
     "lodash": "^4.17.21",
     "xterm": "^4.15.0",
     "xterm-addon-fit": "^0.5.0",

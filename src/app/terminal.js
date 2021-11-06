@@ -64,39 +64,36 @@ export function runRootTerminal(term) {
                         term.setCurrentLine(newLine, true)
                     }
                     break;
-                // case "\033[A": // up
-                //     var h = [...term.history].reverse();
-                //     if (term.historyCursor < h.length - 1) {
-                //         term.historyCursor += 1;
-                //         term.setCurrentLine(h[term.historyCursor], false);
-                //     }
-                //     break;
-                // case "\033[B": // down
-                //     var h = [...term.history].reverse();
-                //     if (term.historyCursor > 0) {
-                //         term.historyCursor -= 1;
-                //         term.setCurrentLine(h[term.historyCursor], false);
-                //     } else {
-                //         term.clearCurrentLine(true);
-                //     }
-                //     break;
-                // case "\033[C": // right
-                //     if (term.pos() < term.currentLine.length) {
-                //         term.write('\x1b[C');
-                //     }
-                //     break;
-                // case "\033[D": // left
-                //     if (term.pos() > 0) {
-                //         term.write('\x1b[D');
-                //     }
-                //     break;
+                case "\x1b[A": // up
+                    console.log("uppp")
+                    var h = [...term.history].reverse();
+                    if (term.historyCursor < h.length - 1) {
+                        term.historyCursor += 1;
+                        term.setCurrentLine(h[term.historyCursor], false);
+                    }
+                    break;
+                case "\x1b[B": // down
+                    var h = [...term.history].reverse();
+                    if (term.historyCursor > 0) {
+                        term.historyCursor -= 1;
+                        term.setCurrentLine(h[term.historyCursor], false);
+                    } else {
+                        term.clearCurrentLine(true);
+                    }
+                    break;
+                case "\x1b[C": // right
+                    if (term.pos() < term.currentLine.length) {
+                        term.write('\x1b[C');
+                    }
+                    break;
+                case "\x1b[D": // left
+                    if (term.pos() > 0) {
+                        term.write('\x1b[D');
+                    }
+                    break;
                 case '\t': // tab
                     const cmd = term.currentLine.split(" ")[0];
                     const rest = term.currentLine.slice(cmd.length).trim();
-
-                    
-
-                    
                     const autocompleteCmds = Object.keys(commands).filter((c) => c.startsWith(cmd));
                     var autocompleteArgs;
 

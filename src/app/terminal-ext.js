@@ -1,5 +1,6 @@
 import { colorText } from "./utils";
 import { commands } from "./config/commands";
+import { getArt ,LOGO_TYPE } from "./ascii-art";
 
 export const extend = (term,fitAddon) => {
     term.currentLine = "";
@@ -63,13 +64,13 @@ export const extend = (term,fitAddon) => {
         }
 
         // // Commands
-        // const cmds = Object.keys(commands);
-        // for (let cmd of cmds) {
-        //     const cmdMatches = text.matchAll(`%${cmd}%`);
-        //     for (match of cmdMatches) {
-        //         text = text.replace(match[0], colorText(cmd, "command"));
-        //     }
-        // }
+        const cmds = Object.keys(commands);
+        for (let cmd of cmds) {
+            const cmdMatches = text.matchAll(`%${cmd}%`);
+            for (let match of cmdMatches) {
+                text = text.replace(match[0], colorText(cmd, "command"));
+            }
+        }
 
         term.writeln(text);
     };
@@ -81,7 +82,7 @@ export const extend = (term,fitAddon) => {
     }
 
     term.printLogoType = () => {
-        term.writeln(term.cols >= 40 ? LOGO_TYPE : "[Root Ventures]\r\n");
+        term.writeln(term.cols >= 40 ? LOGO_TYPE : "[VIT Linux Users Group]\r\n");
     }
 
     term.openURL = (url, newWindow = true) => {
@@ -108,15 +109,16 @@ export const extend = (term,fitAddon) => {
         if (typeof (fn) === "undefined") {
             term.stylePrint(`Command not found: ${cmd}. Try 'help' to get started.`);
         } else {
-            return fn(args);
+            return fn(term,args);
         }
     }
 
     term.resizeListener = () => {
+        console.log("hiii")
         term._initialized = false;
         term.init(term.user, true);
         term.runDeepLink();
-        for (c of term.history) {
+        for (let c of term.history) {
             term.prompt("\r\n", ` ${c}\r\n`);
             term.command(c);
         }
@@ -130,8 +132,8 @@ export const extend = (term,fitAddon) => {
         // preloadASCIIArt();
         // preloadFiles();
         term.reset();
-        // term.printLogoType();
-        term.stylePrint('Welcome to the Root Ventures terminal. Seeding bold engineers!');
+        term.printLogoType();
+        term.stylePrint('Welcome to the VIT LUG terminal. Seeding bold engineers!');
         term.stylePrint(`Type ${colorText("help", "command")} to get started. Or type ${colorText("exit", "command")} for web version.`, false);
 
         term.user = user;
@@ -158,7 +160,7 @@ function _wordWrap(str, maxWidth) {
         let found = false;
 
         // Inserts new line at first whitespace of the line
-        for (i = maxWidth - 1; i >= 0; i--) {
+        for (let i = maxWidth - 1; i >= 0; i--) {
             if (_testWhite(str.charAt(i))) {
                 res = res + [str.slice(0, i), newLineStr].join('');
                 str = str.slice(i + 1);
