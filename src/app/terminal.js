@@ -1,7 +1,8 @@
 import { commands } from "./config/commands";
 import { team } from "./config/team";
 import { portfolio } from "./config/portfolio";
-import { colorText } from "./utils";
+import { _DIRS } from "./config/fs";
+import { colorText ,filesHere} from "./utils";
 
 
 
@@ -104,13 +105,13 @@ export function runRootTerminal(term) {
                         term.prompt();
                         term.setCurrentLine(oldLine);
                     } else if (["cat", "tail", "less", "head", "open", "mv", "cp", "chown", "chmod"].includes(cmd)) {
-                        autocompleteArgs = _filesHere().filter((f) => f.startsWith(rest));
+                        autocompleteArgs = filesHere(term).filter((f) => f.startsWith(rest));
                     } else if (["whois", "finger", "groups"].includes(cmd)) {
                         autocompleteArgs = Object.keys(team).filter((f) => f.startsWith(rest));
                     } else if (["man", "woman", "tldr"].includes(cmd)) {
                         autocompleteArgs = Object.keys(portfolio).filter((f) => f.startsWith(rest));
                     } else if (["cd"].includes(cmd)) {
-                        autocompleteArgs = _filesHere().filter((dir) => dir.startsWith(rest) && !_DIRS[term.cwd].includes(dir));
+                        autocompleteArgs = filesHere(term).filter((dir) => dir.startsWith(rest) && !_DIRS[term.cwd].includes(dir));
                     }
 
                     // do the autocompleting

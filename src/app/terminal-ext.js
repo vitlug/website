@@ -1,6 +1,7 @@
 import { colorText } from "./utils";
 import { commands } from "./config/commands";
 import { getArt ,LOGO_TYPE } from "./ascii-art";
+import { preloadFiles } from "./config/fs";
 
 export const extend = (term,fitAddon) => {
     term.currentLine = "";
@@ -82,7 +83,7 @@ export const extend = (term,fitAddon) => {
     }
 
     term.printLogoType = () => {
-        term.writeln(term.cols >= 40 ? LOGO_TYPE : "[VIT Linux Users Group]\r\n");
+        term.writeln(term.cols >= 80 ? LOGO_TYPE : "[VIT Linux Users Group]\r\n");
     }
 
     term.openURL = (url, newWindow = true) => {
@@ -130,7 +131,7 @@ export const extend = (term,fitAddon) => {
     term.init = (user = "guest", preserveHistory = false) => {
         fitAddon.fit();
         // preloadASCIIArt();
-        // preloadFiles();
+        preloadFiles();
         term.reset();
         term.printLogoType();
         term.stylePrint('Welcome to the VIT LUG terminal. Seeding bold engineers!');

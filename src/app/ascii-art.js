@@ -1,5 +1,7 @@
 
 import aalib from "aalib.js";
+import { portfolio } from "./config/portfolio";
+import { team } from "./config/team";
 
 export const LOGO_TYPE =
 `
@@ -17,7 +19,7 @@ export const LOGO_TYPE =
   ############  ###   ####   ####   #### ### ##### #####   QQQQQ#######QQQQQ
 `.replaceAll("\n", "\r\n");
 
-function preloadASCIIArt(term) {
+export function preloadASCIIArt(term) {
     const companies = Object.keys(portfolio);
     for (let c of companies) {
         _loadArt(c, 0.5, 1.0, 'jpg', false);
